@@ -1,0 +1,17 @@
+version: '2'
+services:
+    prod:
+        build:
+            context: ../../
+            dockerfile: docker/dev/Dockerfile
+        ports:
+            - "22000:22000"
+        environment:
+            MONGO_HOST: db
+        depends_on:
+            - db
+    db:
+        image: mongo:latest
+        hostname: db
+        expose:
+            - "27017"

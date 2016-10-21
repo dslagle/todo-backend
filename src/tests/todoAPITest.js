@@ -1,8 +1,8 @@
-var chaiPost = require("chai");
+var chai = require("chai");
 var chaiHttp = require("chai-http");
-var expect = chaiPost.expect;
+var expect = chai.expect;
 
-chaiPost.use(chaiHttp);
+chai.use(chaiHttp);
 
 describe("post todo test", function () {
     var server = require("../server");
@@ -12,8 +12,8 @@ describe("post todo test", function () {
     });
 
     it("get request to todo should return 200 OK with json", function (done) {
-        chaiPost.request(server)
-            .get("/todo")
+        chai.request(server)
+            .get("http://127.0.0.1/todo")
             .end(function (err, res) {
                 expect(err).to.be.null;
                 expect(res).to.have.status(200);
@@ -23,7 +23,7 @@ describe("post todo test", function () {
     });
 
     it("post /todo should return 200 OK with saved item and no error", function (done) {
-        chaiPost.request(server)
+        chai.request(server)
             .post("/todo")
             .send({ description: "test book", completed: false, order: 2 })
             .end(function (err, res) {
@@ -36,7 +36,7 @@ describe("post todo test", function () {
     });
 
     it("get /fib/x should return an array of numbers representing the fibinacci sequence with x elements", function (done) {
-        chaiPost.request(server)
+        chai.request(server)
             .get("/fib/10")
             .end(function (err, res) {
                 expect(err).to.be.null;
@@ -46,7 +46,7 @@ describe("post todo test", function () {
                 done();
             });
 
-        chaiPost.request(server)
+        chai.request(server)
             .get("/fib/0")
             .end(function (err, res) {
                 expect(err).to.be.null;
