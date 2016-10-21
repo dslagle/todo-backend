@@ -20,4 +20,21 @@ function fib(x) {
     return seq;
 }
 
-module.exports = { fib: fib };
+function average(nums) {
+    return nums.reduce((a, b) => a + b) / nums.length;
+}
+
+function median(nums) {
+    nums = nums.sort((a, b) => a - b);
+    
+    if (nums.length % 2 === 0) {
+        let i = nums.length / 2;
+
+        return (nums[i] + nums[i - 1]) / 2;
+    }
+    else {
+        return nums[Math.floor(nums.length / 2)];
+    }
+}
+
+module.exports = { fib: fib, average: average, median: median };
