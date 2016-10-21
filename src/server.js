@@ -1,9 +1,10 @@
 let app = require("express")();
 let bp = require("body-parser");
 let path = require("path");
-let math = require("./math");
 let db = require("mongoose");
+
 let todoRouter = require("./todo/todo.router");
+let mathRouter = require("./math/math.router");
 
 const address = "localhost";
 const port = 22000;
@@ -26,11 +27,7 @@ app.use(function(request, response, next) {
 });
 
 app.use("/todo", todoRouter);
-
-app.get("/fib/:num", function(request, response) {
-    let num = request.params.num;
-    response.json({ result: math.fib(num) });
-});
+app.use("/math", mathRouter);
 
 module.exports = app.listen(port, address, function() {
     console.log(`Listening on http:\\\\${address}:${port}`);
