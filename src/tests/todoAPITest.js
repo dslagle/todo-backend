@@ -4,35 +4,11 @@ var expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe("post todo test", function () {
-    var server = require("../server");
+let server = require("../server");
 
+describe("math fibinacci tests", function() {
     before(function () {
         //autoformat
-    });
-
-    it("get request to todo should return 200 OK with json", function (done) {
-        chai.request(server)
-            .get("/todo")
-            .end(function (err, res) {
-                expect(err).to.be.null;
-                expect(res).to.have.status(200);
-                expect(res).to.be.json;
-                done();
-            });
-    });
-
-    it("post /todo should return 200 OK with saved item and no error", function (done) {
-        chai.request(server)
-            .post("/todo")
-            .send({ description: "test book", completed: false, order: 2 })
-            .end(function (err, res) {
-                expect(err).to.be.null;
-                expect(res).to.have.status(200);
-                expect(res).to.be.json;
-                expect(res.body.error).to.equal(false);
-                done();
-            });
     });
 
     it("get /math/fib/x should return an array of numbers representing the fibinacci sequence with x elements", function (done) {
@@ -58,6 +34,12 @@ describe("post todo test", function () {
                 done();
             });
     });
+});
+
+describe("math mean tests", function () {
+    before(function () {
+        //autoformat
+    });
 
     it("get /math/average/1,2,3,4,5,6,7,8 should return 4.5", function (done) {
         chai.request(server)
@@ -82,7 +64,9 @@ describe("post todo test", function () {
                 done();
             });
     });
+});
 
+describe("math median tests", function() {
     it("get /math/median/3,7,2,6,4,9,12,43,2 should return 6", function (done) {
         chai.request(server)
             .get("/math/median/3,7,2,6,4,9,12,43,2")
@@ -103,6 +87,46 @@ describe("post todo test", function () {
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(res.body.result).to.equal(2.5);
+                done();
+            });
+    });
+});
+
+describe("todo items test", function () {
+    before(function () {
+        //autoformat
+    });
+
+    it("get request to todo should return 200 OK with json", function (done) {
+        chai.request(server)
+            .get("/todo")
+            .end(function (err, res) {
+                expect(err).to.be.null;
+                expect(res).to.have.status(200);
+                expect(res).to.be.json;
+                done();
+            });
+    });
+
+    it("get request for non-existent item should return 404 NOT FOUND", function (done) {
+        chai.request(server)
+            .get("/todo/blahblahidontexist")
+            .end(function (err, res) {
+                expect(err).not.to.be.null;
+                expect(res).to.have.status(404);
+                done();
+            });
+    });
+
+    it("post /todo should return 200 OK with saved item and no error", function (done) {
+        chai.request(server)
+            .post("/todo")
+            .send({ description: "test book", completed: false, order: 2 })
+            .end(function (err, res) {
+                expect(err).to.be.null;
+                expect(res).to.have.status(200);
+                expect(res).to.be.json;
+                expect(res.body.error).to.equal(false);
                 done();
             });
     });

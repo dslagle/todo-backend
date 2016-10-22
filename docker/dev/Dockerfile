@@ -1,6 +1,8 @@
 FROM todo-base:latest
 MAINTAINER Derek Slagle <derek.slagle@routematch.com>
 
+EXPOSE 22000
+
 RUN apt-get -y update
 
 VOLUME ["/bundle", "/reports"]
@@ -10,6 +12,4 @@ WORKDIR /application
 
 RUN npm i
 
-#ADD scripts/entry.sh /usr/local/bin/entry.sh
-#RUN chmod +x /usr/local/bin/entry.sh
 ENTRYPOINT ["npm", "start"]

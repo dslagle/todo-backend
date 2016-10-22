@@ -6,7 +6,7 @@ let db = require("mongoose");
 let todoRouter = require("./todo/todo.router");
 let mathRouter = require("./math/math.router");
 
-const address = "localhost";
+const address = "0.0.0.0";
 const port = 22000;
 
 const ip = process.env.MONGO_HOST || "localhost";
@@ -19,6 +19,7 @@ app.use(bp.urlencoded({ extended: true }));
 app.use(bp.json());
 
 app.use(function(request, response, next) {
+    console.log("Request!!!");
     response.setHeader("Access-Control-Allow-Origin", "*");
     response.setHeader("Access-Control-Allow-Methods",
         "POST, GET, PATH, DELETE, PUT");

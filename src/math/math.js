@@ -27,7 +27,7 @@ function average(nums) {
 function median(nums) {
     nums = nums.sort((a, b) => a - b);
     
-    if (nums.length % 2 === 0) {
+    if (nums.length % 2 === 0) { 
         let i = nums.length / 2;
 
         return (nums[i] + nums[i - 1]) / 2;

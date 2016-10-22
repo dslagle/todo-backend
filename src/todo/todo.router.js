@@ -52,4 +52,15 @@ router.patch("/:id", function(request, response) {
     });
 });
 
+router.get("/:id", function(request, response) {
+    model.findById(request.params.id, (err, item) => {
+        if (err || !item) {
+            response.status(404).end();
+        }
+        else {
+            response.json({ error: false, item: item });
+        }
+    });
+});
+
 module.exports = router;
