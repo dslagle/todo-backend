@@ -1,4 +1,5 @@
 node_modules
+security
 .vscode/settings.json
 src/coverage
 npm-debug.log
